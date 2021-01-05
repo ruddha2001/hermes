@@ -1,0 +1,29 @@
+{
+  "name": "hermes",
+  "version": "0.0.1",
+  "description": "A simple web mailer",
+  "main": "build/index.js",
+  "repository": "https://github.com/ruddha2001/hermes.git",
+  "license": "MIT",
+  "author": {
+    "name": "Aniruddha Chatterjee",
+    "email": "ruddha.mine@gmail.com",
+    "url": "https://www.aniruddha.net"
+  },
+  "scripts": {
+    "start": "node build/index.js",
+    "postinstall": "cd client && yarn",
+    "build": "tsc && cd client && yarn build"
+  },
+  "dependencies": {
+    "bunyan": "^1.8.14",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongodb": "^3.6.3"
+  },
+  "devDependencies": {
+    "@types/bunyan": "^1.8.6",
+    "@types/express": "^4.17.9",
+    "@types/mongodb": "^3.6.3"
+  }
+}
