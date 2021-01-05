@@ -1,0 +1,9 @@
+language: node_js
+node_js:
+  - 12
+  - 14
+services:
+  - mongodb
+env:
+  - MONGODB_URI: mongodb://localhost:27017
+  - CRYPTO_KEY: 99999999999999999999999999999999
