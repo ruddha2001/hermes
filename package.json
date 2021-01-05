@@ -12,7 +12,7 @@
   },
   "scripts": {
     "start": "node build/index.js",
-    "postinstall": "cd client && yarn",
+    "postinstall": "cd client && yarn && cd .. && yarn build",
     "build": "tsc && cd client && yarn build",
     "test": "./node_modules/mocha/bin/mocha ./build/test --exit"
   },

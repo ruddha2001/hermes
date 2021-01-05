@@ -15,17 +15,10 @@ Please delete options that are not relevant.
 
 # How Has This Been Tested?
 
-Please describe the tests that you ran to verify your changes. Provide instructions so we can reproduce. Please also list any relevant details for your test configuration
+This PR is tested by manually executing `yarn run` and GitHub Actions.
 
-- [ ] Test A
-- [ ] Test B
-
-**Test Configuration**:
-
-- Firmware version:
-- Hardware:
-- Toolchain:
-- SDK:
+- [ ] Manual `yarn test`
+- [ ] Github Actions
 
 # Checklist:
 
