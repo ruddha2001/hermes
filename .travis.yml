@@ -5,5 +5,4 @@ node_js:
 services:
   - mongodb
 env:
-  - MONGODB_URI: mongodb://localhost:27017
-  - CRYPTO_KEY: 99999999999999999999999999999999
+  - MONGODB_URI=mongodb://localhost:27017 CRYPTO_KEY=99999999999999999999999999999999
