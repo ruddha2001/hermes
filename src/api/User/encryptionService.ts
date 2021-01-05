@@ -18,11 +18,3 @@ export const decrypt = (encryptedData: string, incomingIv: string) => {
   decrypted = Buffer.concat([decrypted, decipher.final()]);
   return decrypted.toString();
 };
-
-console.log(encrypt("My name is Aniruddha"));
-console.log(
-  decrypt(
-    "9479d997215daa5bc295002702c95fed491b7c314bba5a6c5187e7ff07f2896e",
-    "6c462bfc8ac5e68b2beaa93283f16d1a"
-  )
-);
