@@ -37,8 +37,22 @@ describe("Nodeamailer Controller Test", function () {
       "ruddha.mine@gmail.com"
     );
   }).timeout(10000);
-  it("Login using invalid credentials", async () => {
+  it("Send mass test mails", async () => {
     let testAccount = await createTestAccount();
+    await sendMailSmtp(
+      "smtp.ethereal.email",
+      587,
+      false,
+      testAccount.user,
+      testAccount.pass,
+      "random@example.com",
+      "Test Mail from Hermes",
+      undefined,
+      "",
+      Buffer.from("random")
+    );
+  }).timeout(10000);
+  it("Login using invalid credentials for single mail", async () => {
     await expectThrowsAsync(
       sendMailSmtp,
       [
@@ -52,7 +66,25 @@ describe("Nodeamailer Controller Test", function () {
         undefined,
         "ruddha.mine@gmail.com",
       ],
-      "Failed to send email to ruddha.mine@gmail.com"
+      "Invalid login creds"
+    );
+  }).timeout(5000);
+  it("Login using invalid credentials for mass mails", async () => {
+    await expectThrowsAsync(
+      sendMailSmtp,
+      [
+        "smtp.ethereal.email",
+        587,
+        false,
+        "random",
+        "random",
+        "random@example.com",
+        "Test Mail from Hermes",
+        undefined,
+        "",
+        Buffer.from("random"),
+      ],
+      "Invalid login creds"
     );
   }).timeout(5000);
 });

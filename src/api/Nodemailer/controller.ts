@@ -33,7 +33,7 @@ export const sendMailSmtp = async (
 
   for (let i = 0; i < receiverArray.length; i++) {
     try {
-      let info = await transporter.sendMail({
+      await transporter.sendMail({
         from: from,
         to: receiverArray[i],
         subject: subject,
@@ -43,7 +43,9 @@ export const sendMailSmtp = async (
       logger.info("Sent mail to " + receiverArray[i]);
     } catch (error) {
       logger.error(error);
-      throw Error("Failed to send email to " + receiverArray[i]);
+      if (error.message === "Invalid login: 535 Authentication failed")
+        throw Error("Invalid login creds");
+      logger.error("Failed to send email to " + receiverArray[i]);
     }
   }
 };
