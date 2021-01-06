@@ -7,7 +7,6 @@ export const encrypt = (rawData: string) => {
   let cipher = createCipheriv(algorithm, key, iv);
   let encrypted = cipher.update(rawData);
   encrypted = Buffer.concat([encrypted, cipher.final()]);
-  console.log(iv);
   return { iv: iv, encryptedData: encrypted.toString("hex") };
 };
 
