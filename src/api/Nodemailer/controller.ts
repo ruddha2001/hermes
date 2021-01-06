@@ -8,8 +8,8 @@ export const sendMailSmtp = async (
   user: string,
   pass: string,
   from: string,
-  htmlFile: Buffer,
   subject: string,
+  htmlFile?: Buffer,
   to?: string,
   csv?: Buffer
 ) => {
