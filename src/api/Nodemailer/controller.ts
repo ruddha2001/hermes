@@ -1,6 +1,30 @@
 import { createTransport } from "nodemailer";
 import { logger } from "../../config";
 
+export const verifySmtp = async (
+  host: string,
+  port: number,
+  secure: boolean,
+  user: string,
+  pass: string
+) => {
+  const transporter = createTransport({
+    host: host,
+    port: port,
+    secure: secure,
+    auth: {
+      user: user,
+      pass: pass,
+    },
+  });
+
+  try {
+    await transporter.verify();
+  } catch (error) {
+    throw Error("Invalid login creds");
+  }
+};
+
 export const sendMailSmtp = async (
   host: string,
   port: number,
