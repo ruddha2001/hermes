@@ -1,7 +1,7 @@
 require("dotenv").config();
 import chai from "chai";
 import { createTestAccount } from "nodemailer";
-import { sendMailSmtp } from "../src/api/Nodemailer/controller";
+import { sendMailSmtp, verifySmtp } from "../src/api/Nodemailer/controller";
 const expect = chai.expect;
 
 const expectThrowsAsync = async (
@@ -22,7 +22,17 @@ const expectThrowsAsync = async (
   }
 };
 
-describe("Nodeamailer Controller Test", function () {
+describe("Nodemailer Controller Test", function () {
+  it("Verify SMTP credentials", async () => {
+    let testAccount = await createTestAccount();
+    await verifySmtp(
+      "smtp.ethereal.email",
+      587,
+      false,
+      testAccount.user,
+      testAccount.pass
+    );
+  }).timeout(10000);
   it("Send a test mail", async () => {
     let testAccount = await createTestAccount();
     await sendMailSmtp(
@@ -51,7 +61,7 @@ describe("Nodeamailer Controller Test", function () {
       "",
       Buffer.from("random")
     );
-  }).timeout(10000);
+  }).timeout(15000);
   it("Login using invalid credentials for single mail", async () => {
     await expectThrowsAsync(
       sendMailSmtp,
