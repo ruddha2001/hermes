@@ -47,7 +47,6 @@ export const sendMailSmtp = async (
     },
   });
 
-  let htmlString = "<h1>Hello</h1>"; // To be later parsed by dot.js
   let receiverArray: string[] = [];
 
   if (csv !== undefined) {
@@ -57,10 +56,12 @@ export const sendMailSmtp = async (
 
   for (let i = 0; i < receiverArray.length; i++) {
     try {
+      let htmlString = "<h1>Hello</h1>"; // To be later parsed by dot.js
+      let subjectString = "Some subject"; // To be later parsed by dot.js
       await transporter.sendMail({
         from: from,
         to: receiverArray[i],
-        subject: subject,
+        subject: subjectString,
         text: "Please use a mail client supporting HTML to view the content",
         html: htmlString,
       });
