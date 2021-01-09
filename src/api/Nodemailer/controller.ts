@@ -1,5 +1,6 @@
 import { createTransport } from "nodemailer";
 import { logger } from "../../config";
+import { getParsedString } from "../shared/services/dotJsService";
 
 export const verifySmtp = async (
   host: string,
@@ -47,30 +48,35 @@ export const sendMailSmtp = async (
     },
   });
 
-  let receiverArray: string[] = [];
+  let receiverArray: { email: string; data?: any }[] = [];
 
   if (csv !== undefined) {
     // To be later converted to JSON
-    receiverArray = ["ruddha.mine@gmail.com", "ac8451@srmist.edu.in"];
-  } else receiverArray.push(to!);
+    receiverArray = [
+      { email: "ruddha.mine@gmail.com" },
+      { email: "ac8451@srmist.edu.in" },
+    ];
+  } else receiverArray.push({ email: to! });
 
   for (let i = 0; i < receiverArray.length; i++) {
     try {
-      let htmlString = "<h1>Hello</h1>"; // To be later parsed by dot.js
-      let subjectString = "Some subject"; // To be later parsed by dot.js
+      let receiverObject = receiverArray[i];
+      // Get parsed strings from dotJs
+      let htmlString = getParsedString("<h1>Hello</h1>", receiverObject.data);
+      let subjectString = getParsedString("Some subject", receiverObject.data);
       await transporter.sendMail({
         from: from,
-        to: receiverArray[i],
+        to: receiverObject.email,
         subject: subjectString,
         text: "Please use a mail client supporting HTML to view the content",
         html: htmlString,
       });
-      logger.info("Sent mail to " + receiverArray[i]);
+      logger.info("Sent mail to " + receiverObject.email);
     } catch (error) {
       logger.error(error);
       if (error.message === "Invalid login: 535 Authentication failed")
         throw Error("Invalid login creds");
-      logger.error("Failed to send email to " + receiverArray[i]);
+      logger.error("Failed to send email to " + receiverArray[i].email);
     }
   }
 };
