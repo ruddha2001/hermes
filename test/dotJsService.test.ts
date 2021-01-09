@@ -17,8 +17,8 @@ describe("dotJs Service Test", function () {
     expect(parsedString).to.be.equal("Welcome to undefined");
   });
   it("Get an error on invalid data", () => {
-    expect(getParsedString(`Welcome to {{=it.name}}`, undefined)).to.throw(
-      "TypeError: Cannot read property 'name' of undefined"
-    );
+    expect(() => {
+      getParsedString(`Welcome to {{=it.name}}`, undefined);
+    }).to.throw("Cannot read property 'name' of undefined");
   });
 });
