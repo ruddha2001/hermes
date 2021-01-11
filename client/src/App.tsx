@@ -1,11 +1,12 @@
 import React from 'react';
+import LoginHooks from './components/Login/Login';
 import './styles/App.scss';
 
 function App() {
   return (
-    <p className="text-red-700">
-      Hello
-    </p>
+    <div>
+      <LoginHooks />
+    </div>
   );
 }
 
