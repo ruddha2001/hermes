@@ -9,6 +9,7 @@ const clientId =
 const GoogleLoginButton = () => {
   const onSuccess = (res: any) => {
     console.log("Login Success: currentUser:", res.tokenObj.id_token);
+    localStorage.setItem("token", res.tokenObj.id_token);
     alert(
       `Logged in successfully welcome ${res.profileObj.name} 😍. \n See console for full profile object.`
     );

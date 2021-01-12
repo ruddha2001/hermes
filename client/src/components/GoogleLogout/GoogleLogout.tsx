@@ -6,6 +6,7 @@ const clientId =
 
 const GoogleLogoutButton = () => {
   const onSuccess = () => {
+    localStorage.removeItem("token");
     console.log("Logout made successfully");
     alert("Logout made successfully ✌");
   };
